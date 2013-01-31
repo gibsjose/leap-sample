@@ -75,14 +75,17 @@ class Sample {
     // Create a sample listener and assign it to a controller to receive events
     SampleListener listener = new SampleListener();
     Controller controller = new Controller(listener);
-
-    // Keep this process running until Enter is pressed
-    System.out.println("Press Enter to quit...");
-    try {
+    if (controller.isConnected()) {
+    	// Keep this process running until Enter is pressed
+    	System.out.println("Press Enter to quit...");
+    	try {
 		System.in.read();
 	} catch (IOException e) {
-		
+		e.printStackTrace();
 	}
+   } else {
+	System.out.println("No controller connected");
+   }
 
     //The controller must be disposed of before the listener
     controller = null;
